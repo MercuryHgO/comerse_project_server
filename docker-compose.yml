@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  restapicontrolle:
+    ports:
+      - "3000:1000"
+    build:
+      context: ./services/restController
+      dockerfile: ./Dockerfile
+    environment:
+      - APP_ID=1000
+  databasecontroller:
+    build:
+      context: ./services/databaseController
+      dockerfile: ./Dockerfile
+    environment:
+      - APP_ID=9000

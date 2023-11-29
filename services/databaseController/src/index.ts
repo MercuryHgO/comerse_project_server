@@ -1,5 +1,5 @@
 import express from "express"
-const APP_ID = process.env.APP_ID
+const APP_ID = process.env.APP_ID!
 const app = express()
 
 app.get('/',
