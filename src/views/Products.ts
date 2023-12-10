@@ -71,40 +71,48 @@ router.post("/",
 
 router.patch("/",
 	async (req, res, next) => {
-		const Access = req.get('AccessToken')
-		
-		const data: {
-			id: string,
-			name?: string,
-			price?: number,
-			info?: string
-		}[] = req.body
-		
-		const Products: ProductsController = new  ProductsController()
-		
-		const products = await Products.patchProducts(data,Access)
-		
-		res.send(products)
-		
-		return
+		try {
+			const Access = req.get('AccessToken')
+			
+			const data: {
+				id: string,
+				name?: string,
+				price?: number,
+				info?: string
+			}[] = req.body
+			
+			const Products: ProductsController = new ProductsController()
+			
+			const products = await Products.patchProducts(data, Access)
+			
+			res.send(products)
+			
+			return
+		} catch (e) {
+			next(e)
+		}
 	}
 )
 
 router.delete("/",
 	async (req, res, next) => {
-		const Access = req.get('AccessToken')
-		
-		const data: {
-			id: string
-		}[] = req.body
-		
-		const Products: ProductsController = new ProductsController()
-		
-		const products = await Products.deleteProducts(data,Access)
-		
-		res.send(products)
-		
-		return
+		try {
+			const Access = req.get('AccessToken')
+			
+			const data: {
+				id: string
+			}[] = req.body
+			
+			const Products: ProductsController = new ProductsController()
+			
+			const products = await Products.deleteProducts(data, Access)
+			
+			res.send(products)
+			
+			return
+		} catch (e) {
+			next(e)
+		}
 	}
 )
 

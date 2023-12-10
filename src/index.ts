@@ -19,7 +19,7 @@ app.use("/user",User)
 app.use("/products",Products)
 
 app.use(
-	(err: Error, req, res: express.Response, next) => {
+	(err, req, res: express.Response, next) => {
 		if(err instanceof PrismaClientKnownRequestError) {
 			switch (err.code) {
 				case "P2002":

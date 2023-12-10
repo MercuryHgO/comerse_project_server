@@ -21,6 +21,8 @@ export class JWTModel implements IJWT {
 	async verify(token: string, key: string): Promise<any> {
 		let decodedInfo: string | JwtPayload;
 		
+		if (!token) throw new Error("NO_TOKEN")
+		
 		const tokenIsDestroyed = await prisma.destoryedTokens.findUnique({
 			where: {
 				token: token
