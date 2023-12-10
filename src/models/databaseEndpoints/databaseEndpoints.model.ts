@@ -19,8 +19,10 @@ export class databaseEndpointsModel implements IDatabaseEndpoints {
 	}
 	
 	async execute() : Promise<any[]> {
-		const data = prisma.$transaction(this.requestsStack)
+		const data = await prisma.$transaction(this.requestsStack)
 		this.clearRequests()
+		
+		console.log("End executing")
 		return data
 	}
 }

@@ -12,7 +12,7 @@ export class UserController {
 		
 		this.UserModel.post(data)
 		
-		const info = await this.UserModel.execute()[0]
+		const info = await this.UserModel.execute()
 	}
 	
 	async authorizeUser(login: string, password: string): Promise<{ access: string, refresh: string }> {

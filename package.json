@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "app": "npx prisma migrate deploy && node dist/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "npm run build && npm run app"
   },
   "author": "",
   "license": "ISC",
