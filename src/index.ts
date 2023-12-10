@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 
 import User from "./views/User.js"
 import Admin from "./views/Admin.js"
+import Products from "./views/Products.js"
+
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library.js";
 
 const APP_ID = process.env.APP_ID!
@@ -14,6 +16,7 @@ app.use(bodyParser.json())
 
 app.use("/admin",Admin)
 app.use("/user",User)
+app.use("/products",Products)
 
 app.use(
 	(err: Error, req, res: express.Response, next) => {

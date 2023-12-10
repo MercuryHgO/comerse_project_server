@@ -34,6 +34,7 @@ model Basket {
 
 model Product {
   id     String   @id @default(cuid())
+  name   String
   price  Int
   info   String
   Basket Basket[]
