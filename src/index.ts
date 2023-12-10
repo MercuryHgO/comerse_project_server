@@ -7,6 +7,10 @@ import Products from "./views/Products.js"
 
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library.js";
 
+import {config} from "dotenv"
+
+config()
+
 const APP_ID = process.env.APP_ID!
 const app = express()
 
