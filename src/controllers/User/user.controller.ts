@@ -4,7 +4,7 @@ import {User as UserDatabaseType} from "@prisma/client"
 
 // TODO docs
 
-export class UserController {
+export class AdminController {
 	private UserModel = new UserModel()
 	
 	async registerUser(data: { name: string, login: string, password: string }) {

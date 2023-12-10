@@ -1,5 +1,5 @@
 import {request, Router} from "express";
-import {UserController} from "../controllers/User/user.controller.js";
+import {AdminController} from "../controllers/User/user.controller.js";
 import bodyParser from "body-parser";
 
 const router: Router = Router()
@@ -11,7 +11,7 @@ router.get('/signin',async (req, res, next) => {
 		const Access = req.get('AccessToken')
 		const Refresh = req.get('RefreshToken')
 		
-		const User: UserController = new UserController()
+		const User: AdminController = new AdminController()
 		
 		if (!!Access) {
 			const data = await User.authorizeUserByAccess(Access)
@@ -46,7 +46,7 @@ router.get('/signin',async (req, res, next) => {
 
 router.get('/signup',async (req, res, next) => {
 	try {
-		const User: UserController = new UserController()
+		const User: AdminController = new AdminController()
 		
 		const {name, login, password}: {
 			name?: string,

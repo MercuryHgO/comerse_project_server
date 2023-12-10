@@ -2,12 +2,14 @@ import { PrismaPromise } from "@prisma/client";
 import prisma from '../helpers/prisma.js'
 import {databaseEndpointsModel} from "../databaseEndpoints/databaseEndpoints.model.js";
 import {IJWTAccessRefresh} from "../jsonWebToken/jsonWebTokenAccessRefresh.interface.js";
-import UserJWT from "../jsonWebToken/jsowWebTokenAccessRefresh.model.js";
+import { UserJWTModel } from "../jsonWebToken/jsowWebTokenAccessRefresh.model.js";
+
+// TODO refactor
 
 export default class UserModel extends databaseEndpointsModel {
 	
 	getAuthorizationMethods(): IJWTAccessRefresh {
-		return new UserJWT()
+		return new UserJWTModel()
 	}
 	
 	get(options: {

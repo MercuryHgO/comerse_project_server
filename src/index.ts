@@ -2,6 +2,7 @@ import express from "express"
 import bodyParser from "body-parser";
 
 import User from "./views/User.js"
+import Admin from "./views/Admin.js"
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library.js";
 
 const APP_ID = process.env.APP_ID!
@@ -11,7 +12,8 @@ const app = express()
 
 app.use(bodyParser.json())
 
-app.use('/user',User)
+app.use("/admin",Admin)
+app.use("/user",User)
 
 app.use(
 	(err: Error, req, res: express.Response, next) => {
