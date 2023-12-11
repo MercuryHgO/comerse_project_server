@@ -37,6 +37,15 @@ app.use(
 		}
 		
 		switch (err.message) {
+			case "NO_TOKEN":
+				res.status(401).send("No token provided")
+				break
+			case "TOKEN_DESTROYED":
+				res.status(401).send("Token invalid")
+				break
+			case "TOKEN_INVALID":
+				res.status(401).send("Token invalid")
+				break
 			default:
 				console.error(err)
 				res.status(500).send("Server error")

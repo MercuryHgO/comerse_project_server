@@ -33,7 +33,7 @@ export class JWTModel implements IJWT {
 		
 		verify(token, key, (error, decoded) => {
 			if (error) {
-				throw new Error(error.message)
+				throw new Error("TOKEN_INVALID")
 			}
 			if (decoded) decodedInfo = decoded
 		})
