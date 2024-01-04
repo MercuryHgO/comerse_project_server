@@ -8,6 +8,7 @@ export class ProductsModel extends databaseEndpointsModel {
 		price?: number,
 		info?: string
 	}): void {
+		
 		const request = prisma.product.findMany({
 			where: {
 				OR: [

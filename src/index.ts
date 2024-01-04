@@ -36,6 +36,10 @@ app.use(
 			}
 		}
 		
+		if(err instanceof TypeError) {
+			res.status(422).send("Invalid body")
+		}
+		
 		switch (err.message) {
 			case "NO_TOKEN":
 				res.status(401).send("No token provided")
