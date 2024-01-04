@@ -6,8 +6,19 @@ export class ProductsModel extends databaseEndpointsModel {
 		id?: string,
 		name?: string,
 		price?: number,
-		info?: string
+		info?: string,
+		take?: number
 	}): void {
+		
+		if(data.id === "*") {
+			const request = prisma.product.findMany({
+				take: data.take
+			})
+			
+			this.requestsStack.push(request)
+			
+			return
+		}
 		
 		const request = prisma.product.findMany({
 			where: {

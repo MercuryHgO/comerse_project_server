@@ -29,12 +29,37 @@ router.get("/search",
 	}
 )
 
+router.get("/",
+	async (req, res, next) => {
+		try {
+			const Products: ProductsController = new ProductsController()
+			
+			const product = await Products.getProducts(
+				{
+					id: "*",
+					take: 20
+				}
+			)
+			
+			!!product[0] ? res.send(product) : res.status(404).send('No product found')
+			
+			return
+		} catch (e) {
+			next(e)
+		}
+	}
+)
+
 router.get("/:id",
 	async (req, res, next) => {
 		try {
 			const Products: ProductsController = new ProductsController()
 			
-			const product = await Products.getProducts({id: req.params.id})
+			const product = await Products.getProducts(
+				{
+					id: req.params.id,
+				}
+			)
 			
 			!!product[0] ? res.send(product[0]) : res.status(404).send('No product found')
 			

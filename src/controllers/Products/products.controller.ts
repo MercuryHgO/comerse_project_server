@@ -13,7 +13,8 @@ export class ProductsController {
 		id?: string,
 		name?: string,
 		price?: number,
-		info?: string
+		info?: string,
+		take?: number
 	}): Promise<ProductDatabaseType[]> {
 		this.Products.get(options)
 		
