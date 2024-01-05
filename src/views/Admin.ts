@@ -6,33 +6,33 @@ const router: Router = Router()
 
 router.use(bodyParser.json())
 
-router.get("/signup",
-	async (req, res, next) => {
-		try {
-			const {login, password}: { login?: string, password?: string } = req.query
-			console.log("start")
-			
-			if (!login || !password) {
-				res.sendStatus(400)
-				return
-			}
-			
-			const Admin: AdminController = new AdminController()
-			
-			console.log("start register")
-			await Admin.registerAdmin({login: login, password: password})
-			console.log("end register")
-			
-			
-			res.sendStatus(200)
-			
-			console.log("end")
-			return
-		} catch (e) {
-			next(e)
-		}
-	}
-)
+// router.get("/signup",
+// 	async (req, res, next) => {
+// 		try {
+// 			const {login, password}: { login?: string, password?: string } = req.query
+// 			console.log("start")
+//
+// 			if (!login || !password) {
+// 				res.sendStatus(400)
+// 				return
+// 			}
+//
+// 			const Admin: AdminController = new AdminController()
+//
+// 			console.log("start register")
+// 			await Admin.registerAdmin({login: login, password: password})
+// 			console.log("end register")
+//
+//
+// 			res.sendStatus(200)
+//
+// 			console.log("end")
+// 			return
+// 		} catch (e) {
+// 			next(e)
+// 		}
+// 	}
+// )
 
 router.get('/signin',async (req, res, next) => {
 	try {
