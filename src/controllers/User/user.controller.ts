@@ -4,7 +4,7 @@ import {User as UserDatabaseType} from "@prisma/client"
 
 // TODO docs
 
-export class AdminController {
+export class UserController {
 	private UserModel = new UserModel()
 	
 	async registerUser(data: { name: string, login: string, password: string }) {
@@ -24,6 +24,8 @@ export class AdminController {
 		})
 		
 		const data = await this.UserModel.execute()
+		
+		console.log(data)
 		
 		if (!data[0][0]) throw new Error('USER_CREDENTIAL_AUTHENTICATION_ERROR')
 		
@@ -48,5 +50,18 @@ export class AdminController {
 		const newRefresh = this.UserModel.getAuthorizationMethods().signRefresh(newAccess, {expiresIn: "30d"})
 		
 		return {access: newAccess, refresh: newRefresh}
+	}
+	
+	async deleteUser(refreshToken: string): Promise<void> {
+		const accessToken = await this.UserModel.getAuthorizationMethods().verifyRefresh(refreshToken)
+		const data: UserDatabaseType = await this.UserModel.getAuthorizationMethods().verifyAccess(accessToken.access)
+		
+		this.UserModel.getAuthorizationMethods().destroy(accessToken.access, new Date(Date.now() + 1000 * 60 * 60 * 12))
+		this.UserModel.getAuthorizationMethods().destroy(refreshToken, new Date(Date.now() + 1000 * 60 * 60 * 24 * 30))
+		
+		this.UserModel.delete({id: data.id})
+		
+		await this.UserModel.execute()
+		
 	}
 }

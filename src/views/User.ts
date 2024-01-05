@@ -1,5 +1,5 @@
 import {request, Router} from "express";
-import {AdminController} from "../controllers/User/user.controller.js";
+import {UserController} from "../controllers/User/user.controller.js";
 import bodyParser from "body-parser";
 
 const router: Router = Router()
@@ -11,7 +11,7 @@ router.get('/signin',async (req, res, next) => {
 		const Access = req.get('AccessToken')
 		const Refresh = req.get('RefreshToken')
 		
-		const User: AdminController = new AdminController()
+		const User: UserController = new UserController()
 		
 		if (!!Access) {
 			const data = await User.authorizeUserByAccess(Access)
@@ -46,7 +46,7 @@ router.get('/signin',async (req, res, next) => {
 
 router.get('/signup',async (req, res, next) => {
 	try {
-		const User: AdminController = new AdminController()
+		const User: UserController = new UserController()
 		
 		const {name, login, password}: {
 			name?: string,
@@ -71,10 +71,27 @@ router.get('/signup',async (req, res, next) => {
 		
 		return
 	} catch (e) {
-		console.error("Error catched")
 		next(e)
 	}
 })
+
+router.get('/delete',
+	async (req, res, next) => {
+		try {
+			const Refresh = req.get("RefreshToken")
+			
+			const User: UserController = new UserController()
+			
+			await User.deleteUser(Refresh)
+			
+			res.sendStatus(200)
+			
+			return
+		} catch (e) {
+			next(e)
+		}
+	}
+)
 
 router.get('/',(req, res) => {
 	res.send("alhnfcamjydfgdqIUKD")

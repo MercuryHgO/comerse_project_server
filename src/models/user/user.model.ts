@@ -23,8 +23,10 @@ export default class UserModel extends databaseEndpointsModel {
 				OR: [
 					{ id: options.id },
 					{ name: options.name },
-					{ login: options.login },
-					{ password: options.password },
+					{
+						login: options.login,
+						password: options.password
+					},
 				]
 			}
 		})

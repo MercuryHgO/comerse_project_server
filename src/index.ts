@@ -62,6 +62,9 @@ app.use(
 			case "TOKEN_INVALID":
 				res.status(401).send("Token invalid")
 				break
+			case "USER_CREDENTIAL_AUTHENTICATION_ERROR":
+				res.status(404).send("Login error or user does not exist")
+				break
 			default:
 				console.error(err)
 				res.status(500).send("Server error")
