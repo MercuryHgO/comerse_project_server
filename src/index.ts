@@ -15,6 +15,17 @@ const APP_ID = process.env.APP_ID!
 const app = express()
 
 
+app.use(
+	// Refactor
+	(req: express.Request, res: express.Response, next) => {
+		res.setHeader(
+			"Access-Control-Allow-Origin",
+			"*"
+		)
+		
+		next()
+	}
+)
 
 app.use(bodyParser.json())
 
@@ -23,6 +34,7 @@ app.use("/user",User)
 app.use("/products",Products)
 
 app.use(
+	// Refactor
 	(err, req, res: express.Response, next) => {
 		if(err instanceof PrismaClientKnownRequestError) {
 			switch (err.code) {
